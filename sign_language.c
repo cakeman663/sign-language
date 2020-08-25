@@ -1,5 +1,4 @@
 #include <gtk/gtk.h>
-#include <unistd.h>
 #include <glib.h>
 #include <stdbool.h>
 #include <ctype.h>
@@ -26,8 +25,7 @@ void set_image(GtkImage *image, char *image_path)
   pixbuf = gdk_pixbuf_new_from_file(image_path, &error);
   
   if (pixbuf == NULL) {
-    g_error_free(error);
-    error = NULL;
+    g_clear_error(&error);
     pixbuf = gdk_pixbuf_new_from_file(DEFAULT_IMAGE, &error);
   }
 
